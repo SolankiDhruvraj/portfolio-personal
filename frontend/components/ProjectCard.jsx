@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { apiUrl } from '../config/api.js'
+import axios from 'axios'
 
 const ProjectCard = () => {
     const [projects, setProjects] = useState([])
 
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const response = await fetch(apiUrl('/api/project/get-projects'))
-                const data = await response.json()
-                if (data.projects && data.projects.length > 0) {
-                    setProjects(data.projects)
-                } else {
-                    console.log("No projects found or empty array");
-                }
-            } catch (error) {
-                console.error("Error fetching projects:", error)
+    const fetchProjects = async () => {
+        try {
+            const response = await fetch(apiUrl('/api/project/get-projects'))
+            const data = await response.json()
+            if (data.projects && data.projects.length > 0) {
+                setProjects(data.projects)
+            } else {
+                console.log("No projects found or empty array");
+                setProjects([]); // Ensure generic handling
             }
+        } catch (error) {
+            console.error("Error fetching projects:", error)
         }
+    }
+
+    useEffect(() => {
         fetchProjects()
     }, [])
 
@@ -53,6 +56,7 @@ const ProjectCard = () => {
         boxShadow: '0 18px 40px rgba(15, 23, 42, 0.8)',
         display: 'flex',
         flexDirection: 'column',
+        position: 'relative'
     }
 
     if (projects.length === 0) {

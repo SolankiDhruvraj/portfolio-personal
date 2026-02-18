@@ -62,7 +62,7 @@ const JourneyContent = () => {
     )
 }
 
-export const Experience = () => {
+export const Experience = ({ showJourney = true }) => {
     return (
         <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
             <color attach="background" args={['#000010']} />
@@ -70,7 +70,7 @@ export const Experience = () => {
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
             <pointLight position={[-10, -10, -10]} />
             <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-            <JourneyContent />
+            {showJourney && <JourneyContent />}
         </Canvas>
     );
 };

@@ -14,7 +14,7 @@ const ProjectsPage = () => {
 
   return (
     <div style={pageStyle}>
-      <ProjectCard />
+      <ProjectCard showDelete={true} />
     </div>
   );
 };

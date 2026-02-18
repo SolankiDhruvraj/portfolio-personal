@@ -14,7 +14,7 @@ const AppLayout = () => {
     <div style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden" }}>
       {/* Background 3D experience with scroll-driven sections */}
       <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
-        <Experience />
+        <Experience showJourney={isHome} />
       </div>
 
       <nav
@@ -27,8 +27,11 @@ const AppLayout = () => {
           display: "flex",
           gap: "20px",
           zIndex: 2,
+
           pointerEvents: "auto",
-          background: "transparent",
+          background: "rgba(15, 23, 42, 0.6)",
+          backdropFilter: "blur(10px)",
+          borderBottom: "1px solid rgba(148, 163, 184, 0.1)",
         }}
       >
         <Link to="/" style={{ textDecoration: "none", color: "#fff", fontWeight: "bold" }}>
@@ -56,7 +59,7 @@ const AppLayout = () => {
           pointerEvents: isHome ? "none" : "auto",
         }}
       >
-        <div style={{ flexGrow: 1 }}>
+        <div style={{ flexGrow: 1, overflowY: isHome ? "visible" : "auto" }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<ProjectsPage />} />

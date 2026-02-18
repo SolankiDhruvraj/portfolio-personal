@@ -21,9 +21,6 @@ router.delete("/delete-project/:id", async (req, res) => {
 router.put("/update-project/:id", async (req, res) => {
     const { id } = req.params
     const { title, description, image, link } = req.body
-
-    // Use findByIdAndUpdate directly with the update object
-    // { new: true } ensures we return the updated document
     const updatedProject = await ProjectModel.findByIdAndUpdate(
         id,
         { title, description, image, link },
