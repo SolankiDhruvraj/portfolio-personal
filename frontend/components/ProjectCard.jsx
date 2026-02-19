@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const ProjectCard = () => {
     const [projects, setProjects] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const fetchProjects = async () => {
         try {
@@ -17,6 +18,8 @@ const ProjectCard = () => {
             }
         } catch (error) {
             console.error("Error fetching projects:", error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -57,6 +60,17 @@ const ProjectCard = () => {
         display: 'flex',
         flexDirection: 'column',
         position: 'relative'
+    }
+
+    if (loading) {
+        return (
+            <div style={containerStyle}>
+                <h2 style={headingStyle}>Projects</h2>
+                <div style={{ ...cardStyle, alignItems: 'center', justifyContent: 'center', minHeight: '200px' }}>
+                    <p style={{ color: 'rgba(226, 232, 240, 0.85)', fontSize: '1.2rem' }}>Loading projects...</p>
+                </div>
+            </div>
+        )
     }
 
     if (projects.length === 0) {
